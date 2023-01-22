@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -29,3 +25,15 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::resource('chollometro', 'ChollometroController');
+
+Route::get('/rated', 'ChollometroController@rated')->name("rated");
+
+Route::get('/newest', 'ChollometroController@newest')->name("newest");
+
+Route::get('/chollo/{id}/{rate}', 'ChollometroController@vote')->name("vote");
+
+
+
+

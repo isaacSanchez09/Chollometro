@@ -41,4 +41,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function chollo()
+    {
+        return $this->hasMany('App\Models\Chollo');
+    }
+
+    public function comentari()
+    {
+        return $this->hasMany('App\Models\Comentari');
+    }
+
+    public function like()
+    {
+        return $this->hasMany('App\Models\Like');
+    }
 }
