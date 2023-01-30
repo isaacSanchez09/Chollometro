@@ -14,6 +14,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('chollometro.create')}}">Afegir Chollo</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('categories')}}">Categorias</a>
+            </li>
         </ul>
         <div class="ms-auto nav-item dropdown text-white dropleft me-4">
             @if(Auth::user() && Auth::user()->name)

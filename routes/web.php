@@ -34,6 +34,12 @@ Route::get('/newest', 'ChollometroController@newest')->name("newest");
 
 Route::get('/chollo/{id}/{rate}', 'ChollometroController@vote')->name("vote");
 
+Route::get('/categorias', 'ChollometroController@categories')->name("categories");
+
+Route::post('/categoriaAdd', 'ChollometroController@addCategory')->name("addCategory");
+
+Route::delete('/categoriaDel/{id}', 'ChollometroController@delCategory')->name("delCategory");
+
 
 
 

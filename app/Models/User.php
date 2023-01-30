@@ -56,4 +56,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Like');
     }
+
+    public function getVotedAttribute()
+    {
+        if($this->like()->where('chollo_id', $this->id)->first()){
+            return $this->like()->where('chollo_id', $this->id)->first()->vote;
+        }
+        return false;
+    }
 }

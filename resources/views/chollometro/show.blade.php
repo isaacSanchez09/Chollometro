@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end align-items-end">
-                    @if(Auth::check() && (Auth::user()->id === $chollo->user->id))
+                    @if(Auth::check() && (Auth::user()->id === $chollo->user->id || Auth::user()->rol === "admin"))
                         <div class="d-flex justify-content-end align-items-end col-6 me-2">
                             <a href=" {{route('chollometro.edit' , $chollo->id)}}"><button type="button" class="btn btn-warning mt-2 me-3">Editar</button></a>
                             <form action="{{ route('chollometro.destroy', $chollo) }}" method="POST" class="float-right mt-3 me-2">

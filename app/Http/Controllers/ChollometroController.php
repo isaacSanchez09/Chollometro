@@ -92,7 +92,7 @@ class ChollometroController extends Controller
         try{
             $chollo = Chollo::findOrFail($id);
             $categories = Category::all();
-            if(Auth::user()->id != $chollo->user_id){
+            if(Auth::user()->id != $chollo->user_id && Auth::user()->rol != "admin"){
                 return redirect()->route('chollometro.index');
             }
             return view('chollometro.edit')->with('chollo',$chollo)->with('categories', $categories);
@@ -131,11 +131,13 @@ class ChollometroController extends Controller
     {
         try {
             $chollo = Chollo::findOrFail($id);
-            if(Auth::user()->id != $chollo->user_id){
+            if(Auth::user()->id != $chollo->user_id && Auth::user()->rol != "admin"){
                 return redirect()->route('chollometro.index');
             }
+            $filename = "$chollo->id-ganga-severa.jpg";
+            Storage::delete(asset("public/img/$filename"));
             $chollo->delete();
-            return redirect('/posts');
+            return redirect('/chollometro');
         }catch (ModelNotFoundException $e){
             return redirect()->route('chollometro.index');
         }
@@ -163,6 +165,35 @@ class ChollometroController extends Controller
     {
         $chollos = Chollo::latest()->paginate(5);
         return view('chollometro.index',compact('chollos'));
+    }
+
+    public function categories(){
+        $categories = Category::all();
+        return view('chollometro.indexCat',compact('categories'));
+    }
+
+    public function addCategory(Request $request){
+        try {
+            $category = new Category();
+            $category->name = $request->nombre;
+            $category->save();
+            return redirect()->route('categories');
+        }catch (ModelNotFoundException $e){
+            return redirect()->route('chollometro.index');
+        }
+    }
+
+    public function delCategory($id){
+        try {
+            $category = Category::findOrFail($id);
+            if(Auth::user()->rol != "admin"){
+                return redirect()->route('chollometro.index');
+            }
+            $category->delete();
+            return redirect()->route('categories');
+        }catch (ModelNotFoundException $e){
+            return redirect()->route('chollometro.index');
+        }
     }
 
     public function vote($id,$vote){
