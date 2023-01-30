@@ -17,6 +17,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('categories')}}">Categorias</a>
             </li>
+            @if(Auth::user() && Auth::user()->name)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('myGangas')}}">Mis chollos</a>
+                </li>
+            @endif
         </ul>
         <div class="ms-auto nav-item dropdown text-white dropleft me-4">
             @if(Auth::user() && Auth::user()->name)

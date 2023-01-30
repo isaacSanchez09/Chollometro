@@ -40,6 +40,9 @@ Route::post('/categoriaAdd', 'ChollometroController@addCategory')->name("addCate
 
 Route::delete('/categoriaDel/{id}', 'ChollometroController@delCategory')->name("delCategory");
 
+Route::get('/misChollos', 'ChollometroController@myGangas')->name("myGangas");
+
+
 
 
 

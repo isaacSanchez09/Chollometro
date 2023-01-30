@@ -196,6 +196,16 @@ class ChollometroController extends Controller
         }
     }
 
+    public function myGangas(){
+        try{
+            $chollos = Chollo::where('user_id',Auth::user()->id)->paginate(5);
+            return view('chollometro.profile',compact('chollos'));
+        }catch (ModelNotFoundException $e){
+            return redirect()->route('chollometro.index');
+        }
+
+    }
+
     public function vote($id,$vote){
         try {
             $chollo = Chollo::findOrFail($id);
